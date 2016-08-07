@@ -15,6 +15,8 @@ public class IPUI extends javax.swing.JFrame {
      */
     public IPUI() {
         initComponents();
+        fileHandler = new FileHandler();
+        ipValidator = new IPValidator();
         this.setVisible(true);
         this.myInitComponents();
         this.setLocationRelativeTo(null);
@@ -212,7 +214,8 @@ public class IPUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rbAlt;
     private javax.swing.JRadioButton rbCurrent;
-    private FileHandler fileHandler = new FileHandler();
+    private FileHandler fileHandler;
+    private IPValidator ipValidator;
     // End of variables declaration
     
     private class btnHandler implements ActionListener{
@@ -232,6 +235,7 @@ public class IPUI extends javax.swing.JFrame {
                     for (int i = 0; i < IPStorage.getAddressList().size(); i++) {
                         areaMasterList.append(IPStorage.getAddressList().get(i) + "\n");
                     }
+
                 }
                 catch (Exception ex)
                 {}
