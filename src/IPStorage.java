@@ -6,8 +6,9 @@ public class IPStorage {
         private String address;
         private boolean valid = false;
 
-        public IPaddess(String address) {
-            this.setIPAddress(address);
+        public IPaddess(String address, boolean valid) {
+            this.address = address;
+            this.valid = valid;
         }
 
         public boolean isValid() {
@@ -27,24 +28,16 @@ public class IPStorage {
         }
     }
 
-    private static ArrayList<IPaddess> addressList = new ArrayList<IPaddess>();
+    private static ArrayList<String> addressList = new ArrayList<String>();
     private static ArrayList<IPaddess> validatedList = new ArrayList<IPaddess>();
 
 
-    public static ArrayList<IPaddess> getAddressList() {
+    public static ArrayList<String> getAddressList() {
         return addressList;
-    }
-
-    public static void setAddressList(ArrayList<IPaddess> addressList) {
-        addressList = addressList;
     }
 
     public static ArrayList<IPaddess> getValidatedList() {
         return validatedList;
-    }
-
-    public static void setValidatedList(ArrayList<IPaddess> validatedList) {
-        IPStorage.validatedList = validatedList;
     }
 
     public static void purgeLists()

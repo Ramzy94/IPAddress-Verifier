@@ -17,10 +17,22 @@ public class IPUI extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.myInitComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public static void main(String[]args)
     {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         new IPUI();
     }
 
@@ -200,16 +212,32 @@ public class IPUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rbAlt;
     private javax.swing.JRadioButton rbCurrent;
+    private FileHandler fileHandler = new FileHandler();
     // End of variables declaration
     
     private class btnHandler implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==btnOpenFile)
+            {
+                try {
+                    IPStorage.purgeLists();
+                    areaMasterList.setText("");
+                    areaInvalidList.setText("");
+                    areaValidList.setText("");
 
+                    fileHandler.openFile();
+                    fileHandler.populateList();
 
-            if(e.getSource()==btnOpenFile) {
-                IPStorage.purgeLists();
+                    for (int i = 0; i < IPStorage.getAddressList().size(); i++) {
+                        areaMasterList.append(IPStorage.getAddressList().get(i) + "\n");
+                    }
+                }
+                catch (Exception ex)
+                {}
             }
+            if(e.getSource()==btnAbout)
+                JOptionPane.showMessageDialog(null,"Ramoloi Lehlohonolo Justice Mofokeng\n email Addess:mofokengrlj@gmail.com");
         }
     }
 }
