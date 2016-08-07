@@ -24,7 +24,7 @@ public class FileHandler {
     public void saveFIle(boolean currentDir)
     {
         fileChooser.setDialogType(1);
-        PrintWriter writer;
+        PrintWriter validWriter,invalidWriter;
         if(currentDir) {
             this.invalidFile = new File(fileChooser.getCurrentDirectory().toString() + "\\invalidAdresses.txt");
             this.validFile = new File(fileChooser.getCurrentDirectory().toString() + "\\validAdresses.txt");
@@ -38,6 +38,26 @@ public class FileHandler {
                 this.validFile = new File(fileChooser.getSelectedFile().toString() + "\\validAdresses.txt");
             }
         }
+
+        try {
+            validWriter = new PrintWriter(validFile);
+            invalidWriter = new PrintWriter(invalidFile);
+
+            for (int i=0;i<IPStorage.getValidatedList().size();i++) {
+                if (IPStorage.getValidatedList().get(i).isValid())
+                    validWriter.println(IPStorage.getValidatedList().get(i).getIPAddress() + "\n");
+                else
+                    invalidWriter.println(IPStorage.getValidatedList().get(i).getIPAddress() + "\n");
+            }
+
+            validWriter.close();
+            invalidWriter.close();
+            JOptionPane.showMessageDialog(null,"Saved");
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void populateList()

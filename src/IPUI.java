@@ -236,12 +236,29 @@ public class IPUI extends javax.swing.JFrame {
                         areaMasterList.append(IPStorage.getAddressList().get(i) + "\n");
                     }
 
+                    for(int i=0;i<IPStorage.getAddressList().size();i++) {
+                        IPStorage.addValidatedIPAddress(IPStorage.getAddressList().get(i),ipValidator.IPcheck(IPStorage.getAddressList().get(i)));
+                    }
+
+                    for (int i=0;i<IPStorage.getValidatedList().size();i++){
+                        if(IPStorage.getValidatedList().get(i).isValid())
+                            areaValidList.append(IPStorage.getValidatedList().get(i).getIPAddress()+"\n");
+                        else
+                            areaInvalidList.append(IPStorage.getValidatedList().get(i).getIPAddress()+"\n");
+                    }
                 }
                 catch (Exception ex)
                 {}
             }
             if(e.getSource()==btnAbout)
                 JOptionPane.showMessageDialog(null,"Ramoloi Lehlohonolo Justice Mofokeng\n email Addess:mofokengrlj@gmail.com");
+
+            if(e.getSource()==btnExport) {
+                if(!(rbCurrent.isSelected()) && !(rbAlt.isSelected()))
+                    JOptionPane.showMessageDialog(null,"Please Select Current or Alternate Location to save the files");
+                else
+                    fileHandler.saveFIle(rbCurrent.isSelected());
+                }
+            }
         }
     }
-}

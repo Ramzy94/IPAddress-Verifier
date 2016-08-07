@@ -2,11 +2,11 @@
 import java.util.ArrayList;
 public class IPStorage {
 
-    public class IPaddess{
+    public static class IPaddress{
         private String address;
         private boolean valid = false;
 
-        public IPaddess(String address, boolean valid) {
+        public IPaddress(String address, boolean valid) {
             this.address = address;
             this.valid = valid;
         }
@@ -29,14 +29,20 @@ public class IPStorage {
     }
 
     private static ArrayList<String> addressList = new ArrayList<String>();
-    private static ArrayList<IPaddess> validatedList = new ArrayList<IPaddess>();
+    private static ArrayList<IPaddress> validatedList = new ArrayList<IPaddress>();
 
 
     public static ArrayList<String> getAddressList() {
         return addressList;
     }
 
-    public static ArrayList<IPaddess> getValidatedList() {
+    public static void addValidatedIPAddress(String address,boolean validation){
+        IPaddress ipAddress = new IPaddress(address,validation);
+
+        validatedList.add(ipAddress);
+    }
+
+    public static ArrayList<IPaddress> getValidatedList() {
         return validatedList;
     }
 
